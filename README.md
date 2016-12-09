@@ -1,0 +1,2 @@
+# OneTrustAutomation
+AutomationProjects
