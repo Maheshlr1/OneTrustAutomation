@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation Suite" preserve-order="true">
+
+<test name="AAMPOS Batch Suite">
+		<classes>
+             <class name="com.gb.test.LoginPageTest"/>
+			<class name="com.gb.test.RecycleBinPageTest"/>
+             <class name="com.gb.test.UsersTabTest"/>
+			<class name="com.gb.test.OpenTabTest"/>
+			<class name="com.gb.test.FunctionTabTest"/>
+		    <class name="com.gb.test.ChangeClientTest"/>
+			<class name="com.gb.test.ClientsTabTest"/>
+			<class name="com.gb.test.CashiersTabTest"/>
+			<class name="com.gb.test.StoreProfilesTabTest"/>
+			<!--class name="com.gb.test.BrandingTabTest"/-->
+			<class name="com.gb.test.MenusTabTest"/>
+			<class name="com.gb.test.MerchantTabTest"/>
+			<!--class name="com.gb.test.MobileWalletTabTest"/-->
+			<!--class name="com.gb.test.POSTypesTabTest"/-->
+			<class name="com.gb.test.PreferencesTabTest"/>
+			<class name="com.gb.test.PrintersTabTest"/>
+			<!--class name="com.gb.test.ReasonCodesTabTest"-->
+			<!--class name="com.manh.test.gb.clientteling.ClientelingWCTests"/-->
+		 </classes>
+    </test>
+
+ <test name="CCBO Tests">
+	     <classes>
+           <class name="com.manh.test.gb.backoffice.BackOfficeWCTests"/>
+        </classes>
+    </test>
+  </suite> <!-- Default suite -->
+
+

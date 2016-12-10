@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UI Tests" default="build-tests" basedir=".">
+	<property file="layout.properties" />
+	<property file="build.properties" />
+	
+	<!-- Global Properties -->
+	<property name="build.dir" value="${build.output.path}/build" />
+	<property name="ui-tests-lib.dir" value="${build.output.path}/lib" />
+	<property name="ui-tests-classes.dir" value="${build.dir}/classes" />
+	<property name="ui-tests-config.dir" value="${build.dir}/config" />
+	<property name="ui-tests-resources.dir" value="${build.dir}/testdata" />
+
+	
+	<target name="-clean">
+		<delete dir="${build.output.path}" />
+	</target>
+	
+	<target name="-init">
+		<mkdir dir="${ui-tests-lib.dir}" />
+		<mkdir dir="${ui-tests-classes.dir}" />
+		<mkdir dir="${ui-tests-resources.dir}" />
+
+		<path id="ant.tasks">
+			<fileset dir="${testfw.lib.dir}/ant-tasks">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<!-- Task definition to use ant-contrib's tasks -->
+		<taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="ant.tasks" />
+
+		<path id="groovy.task">
+			<fileset dir="${testfw.lib.dir}">
+				<include name="groovy*.jar" />
+			</fileset>
+		</path>
+
+		<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="groovy.task" />
+
+		<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="groovy.task" />
+
+	</target>
+
+	<target name="build-tests" depends="-clean,-init">
+
+		<!-- Copy necessary jar files from 3rdpartylib -->
+		<copy todir="${ui-tests-lib.dir}">
+			<fileset dir="${testfw.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<!-- Set the classpath for the UI Tests -->
+		<path id="groovy.classpath">
+			<fileset dir="${ui-tests-lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<echo message="Building UI test artifacts.." />
+
+		<!-- expect the caller to define the groovy and groovyc tasks -->
+		<groovyc srcdir="${testfw.src.dir}" destdir="${ui-tests-classes.dir}">
+			<classpath>
+				<path refid="groovy.classpath" />
+			</classpath>
+			<javac />
+		</groovyc>
+
+		<javac srcdir="${testfw.src.dir}" destdir="${ui-tests-classes.dir}" classpathref="groovy.classpath" debug="${build.debug}" deprecation="${build.deprecation}" nowarn="${nowarn}" fork="true" memoryinitialsize="512M" memorymaximumsize="1024M" />
+
+		<for list="${projects.list}" param="project">
+			<sequential>
+
+				<echo message="Compiling test code for the project: @{project}" />
+				<groovyc srcdir="${@{project}.project.dir}/src" destdir="${ui-tests-classes.dir}">
+					<classpath>
+						<path refid="groovy.classpath" />
+					</classpath>
+					<javac />
+				</groovyc>
+
+				<javac srcdir="${@{project}.project.dir}/src" destdir="${ui-tests-classes.dir}" classpathref="groovy.classpath" debug="${build.debug}" deprecation="${build.deprecation}" nowarn="${nowarn}" fork="true" memoryinitialsize="512M" memorymaximumsize="1024M" />
+				
+				<echo message="Packaging resources for the project: @{project}" />
+
+				<copy todir="${ui-tests-resources.dir}" overwrite="true">
+					<fileset dir="${@{project}.project.dir}/resources">
+					</fileset>
+				</copy>
+
+				<copy todir="${ui-tests-config.dir}" overwrite="true">
+					<fileset dir="${@{project}.project.dir}/config">
+						<include name="*.xml" />
+					</fileset>
+				</copy>
+			</sequential>
+		</for>
+							
+		<jar destfile="${ui-tests-lib.dir}/resources.jar" basedir="${ui-tests-resources.dir}">
+		</jar>
+
+		<jar destfile="${ui-tests-lib.dir}/ui-tests.jar" basedir="${ui-tests-classes.dir}">
+		</jar>
+
+		<zip destfile="${build.output.path}/ui-tests.zip">
+			<zipfileset dir="${ui-tests-lib.dir}" prefix="lib" />
+			<zipfileset dir="${ui-tests-config.dir}" prefix="config" />
+			<zipfileset dir="${build.dir}" prefix="build" />
+			<zipfileset dir="${tests.runner.dir}" prefix="run-tests" />
+		</zip>
+		
+	</target>
+	<!--clean output folder before every build-->
+	<target name="clean-output" depends="-init">
+	<echo message="Deleting lib folder from output" />
+	<!--<delete dir="${build.dir}" /> -->
+	<delete dir="${ui-tests-lib.dir}" />
+	</target>
+</project>
+

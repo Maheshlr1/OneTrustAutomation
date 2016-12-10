@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/apw-server-4.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/atmosphere-runtime-2.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/db2jcc.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/gb-common-1.21.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/imageClient.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/jdom-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/junit.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/MobileTestFramework-0.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/ojdbc6-11.2.0.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/poi-3.10-FINAL-20140208.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/testng-6.8.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/ws-commons-util-1.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/xmlrpc-client-3.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/xmlrpc-common-3.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/selenium-server-standalone-2.52.0.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/opencsv-3.7.jar"/>
+	<classpathentry kind="lib" path="C:/gb_api_automation/lib/sqljdbc4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

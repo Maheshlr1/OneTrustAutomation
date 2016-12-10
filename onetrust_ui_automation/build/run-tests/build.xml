@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UI Tests" default="run-tests" basedir=".">
+
+	<target name="-init">
+	    <property name="ws.home" value="${basedir}"/>
+		<property name="test.lib.dir" value="../lib" />
+		<property name="config.dir" value="../config" />
+		<property name="reports.dir" value="../reports" />
+		<property name="xslt.dir" value="${ws.home}/resources/testdata/xslt/testng-results.xsl"/>
+		
+		<property file="env.properties" />
+		
+	
+	<property name="test.dest" value="${ws.home}/build"/>
+    <property name="test.src" value="${ws.home}/src"/>
+	<property name="ng.result" value="test-output"/>
+		
+		<path id="test.classpath">
+			<fileset dir="${test.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<path id="testng.task">
+			<fileset dir="${test.lib.dir}">
+				<include name="testng*.jar" />
+			</fileset>
+		</path>
+
+		<taskdef name="testng" classname="org.testng.TestNGAntTask" classpathref="testng.task" />
+
+	</target>
+
+	<target name="config">
+		<jar destfile="${test.lib.dir}/resources.jar" basedir="." update="true">
+			<include name="env.properties" />
+		</jar>
+	</target>
+
+	<target name="run-tests" depends="-init,config">
+		<testng classpathref="test.classpath" suitename="Selenium Automation" outputdir="${reports.dir}">
+			<xmlfileset dir="${config.dir}" includes="${product}.testng.xml" />
+		</testng>
+	</target>
+	
+	<target name="makexsltreports" depends="run-tests">
+	        <mkdir dir="${reports.dir}/XSLT_Reports/output"/>
+			<mkdir dir="${reports.dir}/XSLT_Reports/XSLTFile"/>
+			<copy file="${resources.dir}/MANIFEST.MF" tofile="${temp.dir.meta-inf}/MANIFEST.MF" overwrite="true" />
+            <xslt in="${reports.dir}/testng-results.xml" style="${ws.home}/resources/testdata/xslt/testng-results.xsl"
+	              out="${ws.home}/XSLT_Reports/output/index.html" classpathref="test.classpath" processor="SaxonLiaison">
+	            <param name="testNgXslt.outputDir" expression="${ws.home}/XSLT_Reports/output/"/>
+	            <param name="testNgXslt.showRuntimeTotals" expression="true"/>
+	            <param expression="true" name="testNgXslt.sortTestCaseLinks"/>
+                <param expression="FAIL,SKIP,PASS,CONF,BY_CLASS" name="testNgXslt.testDetailsFilter"/>
+
+	        </xslt>
+	    </target>
+</project>
